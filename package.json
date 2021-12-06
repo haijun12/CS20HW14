@@ -4,7 +4,7 @@
   "description": "my sample node app",
   "main": "form.js",
   "scripts": {
-  "start": "node sample.js"
+  "start": "node form.js"
 },
   "repository": {
   "type": "git",
