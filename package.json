@@ -17,7 +17,7 @@
 },
   "homepage": ""
 },
-"dependencies": {
+  "dependencies": {
     "express": "^4.17.1",
     "mongodb": "^4.2.1"
 }
