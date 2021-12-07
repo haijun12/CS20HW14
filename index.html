@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type = "text/css">
+        body {
+            text-align:center;
+            font-size:30px;
+        }
+        .button {
+            font-family: 'Josefin Sans', sans-serif;
+            font-weight: 700;
+            font-size: 25px;
+            padding:10px 20px;
+            background-color: #ff9933;
+            color: #003267;
+            border: none;
+            margin-top:  10px;
+            cursor:pointer;
+            -webkit-border-radius: 5px;
+            border-radius: 4px;
+        
+        }
+        .text {
+            font-family: inherit;
+            font-size: 1em;
+            line-height: 1.2em;
+            color: #262626;
+            border: 1px solid #d1d1d1;
+            background: #fff;
+            padding: 9px 0.8em;
+            max-width: 100%;
+            width: 432px;
+            min-height: 32px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Stock Ticker</h1>
+    <form method = "POST" action = "http://localhost:8080/process">
+        <label>Stock Ticker Symbol</label>
+        <br>
+        <input type = "text" name = "ticker" class = "text">
+        <br>
+        <label>Company Name</label>
+        <br>
+        <input type = "text" name = "company" class = "text">
+        <br>
+        <input type = "submit" value = "Submit" class = "button">
+    </form>
+</body>
+</html>
