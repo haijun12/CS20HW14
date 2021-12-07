@@ -12,12 +12,10 @@
 },
   "author": "",
   "license": "ISC",
-  "bugs": {
-  "url": ""
-},
-  "homepage": ""
-}
   "dependencies": {
     "express": "^4.17.1",
     "mongodb": "^4.2.1"
+  }
+},
+  "homepage": ""
 }
