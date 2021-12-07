@@ -1,9 +1,65 @@
-var http = require('http');
-var port = process.env.PORT || 3000;
-console.log("This goes to the console window");
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/html'});
-   res.write("<h2>Hello World</h2>");
-   res.write ("Success!  This app is deployed online");
-   res.end();
-}).listen(port);
+const express = require("express");
+const bodyParser = require("body-parser");
+const { MongoClient } = require("mongodb");
+
+let uri = "mongodb+srv://haijun:lala12345@companies.zke0a.mongodb.net/stock_ticker?retryWrites=true&w=majority";
+
+const PORT = process.env.PORT || 3000;
+
+const app = express();
+const client = new MongoClient(uri);
+app.use(express.static(path.join(__dirname + '/public')));
+app.use('/css', express.static(__dirname + 'public/css'));
+
+app.use(bodyParser.urlencoded({
+    extended:true
+}))
+app.get("/process", function(req,res) {
+    res.sendFile(__dirname + "/index.html");
+})
+
+app.post("/process", function(req, res) {
+    var Ticker = String(req.body.ticker);
+    var Company = String(req.body.company);
+    async function run() {
+        try {
+            await client.connect();
+            
+            const dbo = client.db('stock_ticker');
+            const companies = dbo.collection('companies');
+            console.log(Company);
+            
+            if (Ticker == '')
+            {
+                const Query = {Company: Company};
+                console.log(Query);
+                const display = await companies.findOne(Query);
+                res.send(display.Company + " : " + display.Ticker);
+            }
+            else if (Company == '') // this doesn't work
+            {
+                const display = await companies.find({Ticker: Ticker}, {projection: {_id: 0, Company: 1, Ticker: 1}})
+                .toArray();
+                res.writeHead(200, {'Content-Type': 'text/html'});
+                for (i = 0; i < display.length; i++)
+                {
+                    res.write(display[i].Company + " : " + display[i].Ticker + "<br>");
+                }
+            }
+            else {
+                const Query = {Company: Company, Ticker: Ticker};
+                console.log(Query);
+                const display = await companies.findOne(Query);
+                res.send(display.Company + " : " + display.Ticker);
+            }
+        } finally {
+            await client.close();
+        }
+    }
+    run().catch(console.dir);
+
+})
+
+app.listen(PORT, function(){
+    console.log("running on port 3000")
+})
