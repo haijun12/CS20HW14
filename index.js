@@ -2,6 +2,7 @@ const express = require("express");
 const fs = require("fs");
 const PORT = process.env.PORT || 3000;
 const { MongoClient } = require("mongodb");
+const bodyParser = require("body-parser");
 let uri = "mongodb+srv://haijun:lala12345@companies.zke0a.mongodb.net/stock_ticker?retryWrites=true&w=majority";
 const app = express();
 
