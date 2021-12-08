@@ -4,7 +4,8 @@
   "description": "my sample node app",
   "main": "form.js",
   "scripts": {
-  "start": "node form.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node form.js"
 },
   "repository": {
   "type": "git",
